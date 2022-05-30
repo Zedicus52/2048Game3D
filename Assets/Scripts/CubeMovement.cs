@@ -1,43 +1,70 @@
 using System;
+using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody))]
 public class CubeMovement : MonoBehaviour
 {
+    public event Action SpawnCube;
     [SerializeField] private float _accelerationSpeed;
     [SerializeField] private float _speed;
 
+    private bool _canMove = true;
     private Rigidbody _rb;
     private float _directionX = 0f;
-
-    private void Awake()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _rb.freezeRotation = true;
-    }
+    
 
     private void OnEnable()
     {
         PlayerInput.OnMove += Move;
+        PlayerInput.EndMove += AddImpulse;
     }
 
     private void OnDisable()
     {
         PlayerInput.OnMove -= Move;
+        PlayerInput.EndMove -= AddImpulse;
     }
 
     private void FixedUpdate()
     {
-        float posX = _rb.position.x + _directionX * _speed * Time.deltaTime;
+
+            float posX = _rb.position.x + _directionX * _speed * Time.deltaTime;
+
+            _rb.MovePosition(new Vector3(posX, _rb.position.y, _rb.position.z));
         
-        _rb.MovePosition(new Vector3(posX, _rb.position.y,_rb.position.z));
     }
 
     private void Move(float directionX)
     {
-        _directionX = directionX;
+        if(_canMove) 
+            _directionX = directionX;
     }
-    
-    
-    public void AddImpulse() => _rb.AddForce(new Vector3(0,0,_accelerationSpeed), ForceMode.Impulse);
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+            AddImpulse();
+    }
+
+    private void AddImpulse()
+    {
+        StartCoroutine(Impulse());
+    }
+
+    private IEnumerator Impulse()
+    {
+        _canMove = false;
+        _rb.AddForce(new Vector3(0,0,_accelerationSpeed), ForceMode.Impulse);
+        yield return new WaitForSecondsRealtime(0.5f);
+        SpawnCube?.Invoke();
+        _rb.freezeRotation = false;
+        _directionX = 0f;
+        _canMove = true;
+    }
+
+    public void SetCubeRigidbody(Rigidbody rb)
+    {
+        _rb = rb;
+        _rb.freezeRotation = true;
+    }
 }

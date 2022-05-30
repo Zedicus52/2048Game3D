@@ -6,6 +6,7 @@ using UnityEngine;
 public class PlayerInput : MonoBehaviour
 {
     public static event Action<float> OnMove;
+    public static event Action EndMove;
     private Vector2 _startPos = Vector2.zero;
     private float _direction = 0f;
 
@@ -32,6 +33,9 @@ public class PlayerInput : MonoBehaviour
                     { _direction = 1f; }  
                     if(touch.position.x <= _startPos.x-15)  
                     { _direction = -1f; }
+                    break;
+                case TouchPhase.Ended:
+                    EndMove?.Invoke();
                     break;
                 default:
                     _startPos = touch.position;
