@@ -28,9 +28,8 @@ public class CubeMovement : MonoBehaviour
     private void FixedUpdate()
     {
 
-            float posX = _rb.position.x + _directionX * _speed * Time.deltaTime;
-
-            _rb.MovePosition(new Vector3(posX, _rb.position.y, _rb.position.z));
+        float posX = _rb.position.x + _directionX * _speed * Time.deltaTime;
+        _rb.MovePosition(new Vector3(posX, _rb.position.y, _rb.position.z));
         
     }
 
@@ -39,12 +38,13 @@ public class CubeMovement : MonoBehaviour
         if(_canMove) 
             _directionX = directionX;
     }
-
+#if UNITY_EDITOR
     private void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space))
             AddImpulse();
     }
+#endif
 
     private void AddImpulse()
     {
@@ -65,6 +65,7 @@ public class CubeMovement : MonoBehaviour
     public void SetCubeRigidbody(Rigidbody rb)
     {
         _rb = rb;
+        _rb.velocity = Vector3.zero;
         _rb.freezeRotation = true;
     }
 }

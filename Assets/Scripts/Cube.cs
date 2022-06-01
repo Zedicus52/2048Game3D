@@ -1,18 +1,31 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public int Number => _number;
+    private int _number;
+    private MeshRenderer _meshRenderer;
+
+    private void Awake()
     {
-        
+        _meshRenderer = GetComponent<MeshRenderer>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void SetNumberAndColor(int num, Material mat)
     {
-        
+        _number = num;
+        _meshRenderer.material = mat;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.TryGetComponent(out Cube cube))
+        {
+            if (cube.Number == _number)
+            {
+                cube.SetNumberAndColor(_number*2,_meshRenderer.material);
+                gameObject.SetActive(false);
+            }
+        }
     }
 }

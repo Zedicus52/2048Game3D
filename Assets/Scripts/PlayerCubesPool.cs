@@ -9,10 +9,12 @@ public class PlayerCubesPool : MonoBehaviour
     
     private PoolBasic<Cube> _cubes;
     private CubeMovement _cubeMovement;
+    private CubeDecorator _cubeDecorator;
 
     private void Awake()
     {
         _cubeMovement = GetComponent<CubeMovement>();
+        _cubeDecorator = GetComponent<CubeDecorator>();
         _cubes = new PoolBasic<Cube>(_prefab,_autoExpand,_basicCount, transform);
         GetCube();
     }
@@ -31,6 +33,8 @@ public class PlayerCubesPool : MonoBehaviour
     {
         var cube = _cubes.GetFreeElement();
         cube.transform.position = _startPos;
+        _cubeDecorator.SetCubeColor(cube.GetComponent<Cube>());
+        cube.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         cube.gameObject.SetActive(true);
         if(cube.gameObject.TryGetComponent(out Rigidbody rb))
             _cubeMovement.SetCubeRigidbody(rb);
