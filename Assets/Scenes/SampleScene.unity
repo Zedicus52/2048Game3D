@@ -205,41 +205,41 @@ MonoBehaviour:
   - Number: 2
     CurrentColor: {fileID: 2100000, guid: 46d0fd594abd650419ed6d65e56955a4, type: 2}
   - Number: 4
-    CurrentColor: {fileID: 2100000, guid: a5604f06a80168d4394dba0b8693c9c2, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 76c7c2bb405901543913cddb0dfebd30, type: 2}
   - Number: 4
-    CurrentColor: {fileID: 2100000, guid: a5604f06a80168d4394dba0b8693c9c2, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 76c7c2bb405901543913cddb0dfebd30, type: 2}
   - Number: 8
-    CurrentColor: {fileID: 2100000, guid: 1cc0faa9b45435c419610ff5ba9661cd, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 5a3ae991a7ca4ab4a8093bdae4da7d66, type: 2}
   - Number: 8
-    CurrentColor: {fileID: 2100000, guid: 1cc0faa9b45435c419610ff5ba9661cd, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 5a3ae991a7ca4ab4a8093bdae4da7d66, type: 2}
   - Number: 16
-    CurrentColor: {fileID: 2100000, guid: fda3dc8fec91c704292c2ade0053b54d, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 37222684c75f48c46ae114ddbe5d8de9, type: 2}
   - Number: 16
-    CurrentColor: {fileID: 2100000, guid: fda3dc8fec91c704292c2ade0053b54d, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 37222684c75f48c46ae114ddbe5d8de9, type: 2}
   - Number: 32
-    CurrentColor: {fileID: 2100000, guid: e4efd06e9f59ef945b2de167737375a9, type: 2}
+    CurrentColor: {fileID: 2100000, guid: bd9cd5c9dd131b642bd3e901bf3a680c, type: 2}
   - Number: 32
-    CurrentColor: {fileID: 2100000, guid: e4efd06e9f59ef945b2de167737375a9, type: 2}
+    CurrentColor: {fileID: 2100000, guid: bd9cd5c9dd131b642bd3e901bf3a680c, type: 2}
   - Number: 64
-    CurrentColor: {fileID: 2100000, guid: f138a7b44a522d345a9bd0ffe33b9a0d, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 094c595533eae594aadad80becd4d1dd, type: 2}
   - Number: 64
-    CurrentColor: {fileID: 2100000, guid: f138a7b44a522d345a9bd0ffe33b9a0d, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 094c595533eae594aadad80becd4d1dd, type: 2}
   - Number: 128
-    CurrentColor: {fileID: 2100000, guid: ff00c52abc65ee242a6555e335f5b2e2, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 0645ab63e407faa4a832341458cef0f3, type: 2}
   - Number: 128
-    CurrentColor: {fileID: 2100000, guid: ff00c52abc65ee242a6555e335f5b2e2, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 0645ab63e407faa4a832341458cef0f3, type: 2}
   - Number: 256
-    CurrentColor: {fileID: 2100000, guid: 1d057f73a919ba74e89279013dfbd60c, type: 2}
+    CurrentColor: {fileID: 2100000, guid: a70e76da96c140446b12dd8f47de572f, type: 2}
   - Number: 256
-    CurrentColor: {fileID: 2100000, guid: 1d057f73a919ba74e89279013dfbd60c, type: 2}
+    CurrentColor: {fileID: 2100000, guid: a70e76da96c140446b12dd8f47de572f, type: 2}
   - Number: 512
-    CurrentColor: {fileID: 2100000, guid: fa580b617e2f65f41856f1858b3cf377, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 0c3f7595aa40be541a9ee9341ec664a4, type: 2}
   - Number: 512
-    CurrentColor: {fileID: 2100000, guid: fa580b617e2f65f41856f1858b3cf377, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 0c3f7595aa40be541a9ee9341ec664a4, type: 2}
   - Number: 1024
-    CurrentColor: {fileID: 2100000, guid: ec510c58176076f4b99aa824059d5959, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 25d5d2ee454c17842acfecdb30f96037, type: 2}
   - Number: 2048
-    CurrentColor: {fileID: 2100000, guid: 72820f25eb265f948bd8a589d95ba051, type: 2}
+    CurrentColor: {fileID: 2100000, guid: 0016dd09972eea248bece7c377d79f27, type: 2}
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0

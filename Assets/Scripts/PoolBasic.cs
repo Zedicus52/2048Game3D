@@ -39,7 +39,7 @@ public class PoolBasic<T> where T : MonoBehaviour
     {
         foreach (var obj in _objects)
         {
-            if (obj.isActiveAndEnabled == false)
+            if (obj.gameObject.activeInHierarchy == false)
             {
                 element = obj;
                 obj.gameObject.SetActive(true);
