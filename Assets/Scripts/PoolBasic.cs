@@ -11,34 +11,27 @@ public class PoolBasic<T> where T : MonoBehaviour
     public Transform Parent { get; private set; }
 
     private List<T> _objects;
-
-    public PoolBasic(T prefab, bool autoExpand)
-    {
-        Prefab = prefab;
-        AutoExpand = autoExpand;
-        CreatePool();
-    }
-    public PoolBasic(T prefab, bool autoExpand, int count) : this(prefab, autoExpand)
-    {
-        BasicCount = count;
-    }
-    public PoolBasic(T prefab, bool autoExpand, int count, Transform parent) : this(prefab, autoExpand, count)
+    
+    public PoolBasic(T prefab, bool autoExpand, int count, Transform parent) 
     {
         Parent = parent;
+        Prefab = prefab;
+        BasicCount = count;
+        AutoExpand = autoExpand;
+        CreatePool();
     }
 
     private void CreatePool()
     {
-        _objects = new List<T>(BasicCount);
+        _objects = new List<T>();
         for (int i = 0; i < BasicCount; i++)
-            CreateObject();
+            _objects.Add(CreateObject());
     }
 
     private T CreateObject()
     {
         var obj = Object.Instantiate(Prefab, Parent);
         obj.gameObject.SetActive(false);
-        _objects.Add(obj);
         return obj;
     }
 

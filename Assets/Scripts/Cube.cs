@@ -1,7 +1,9 @@
+using System;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
+    public event Func<int, Material> ChangeMaterial;
     public int Number => _number;
     private int _number;
     private MeshRenderer _meshRenderer;
@@ -21,9 +23,10 @@ public class Cube : MonoBehaviour
     {
         if (other.TryGetComponent(out Cube cube))
         {
-            if (cube.Number == _number)
+            if (cube.Number == _number && cube.Number != 2048)
             {
-                cube.SetNumberAndColor(_number*2,_meshRenderer.material);
+                Material mat = ChangeMaterial?.Invoke(_number * 2);
+                cube.SetNumberAndColor(_number*2,mat);
                 gameObject.SetActive(false);
             }
         }
