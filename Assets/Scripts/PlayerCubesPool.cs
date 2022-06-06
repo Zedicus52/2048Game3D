@@ -39,8 +39,8 @@ public class PlayerCubesPool : MonoBehaviour
         cube.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         cube.gameObject.SetActive(true);
         cube.AddScore += _scoreManager.AddScore;
-        cube.FinishGame += _menuManager.FinisGame;
-        cube.FinishGame += _scoreManager.FinisGame;
+        cube.WinGame += _menuManager.FinisGame;
+        cube.WinGame += _scoreManager.FinisGame;
         if(cube.gameObject.TryGetComponent(out Rigidbody rb))
             _cubeMovement.SetCubeRigidbody(rb);
     }

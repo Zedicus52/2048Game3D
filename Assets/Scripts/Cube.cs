@@ -6,7 +6,7 @@ public class Cube : MonoBehaviour
 {
     public event Func<int, Material> ChangeMaterial;
     public event Action<int> AddScore;
-    public event Action FinishGame;
+    public event Action<bool> WinGame;
     private int _number;
     private MeshRenderer _meshRenderer;
     private Rigidbody _rb;
@@ -40,10 +40,15 @@ public class Cube : MonoBehaviour
                 cube.SetNumberAndColor(_number*2,mat);
                 cube.AddImpulse();
                 if (cube._number == 2048)
-                    FinishGame?.Invoke();
+                    EndGame(true);
                 gameObject.SetActive(false);
             }
         }
+    }
+
+    public void EndGame(bool isWin)
+    {
+        WinGame?.Invoke(isWin);
     }
 
     private void AddImpulse()

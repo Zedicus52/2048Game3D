@@ -40,6 +40,7 @@ public class PlayerInput : MonoBehaviour
                     _direction = 0f;
                     break;
             }
+            
             OnMove?.Invoke(_direction);
         }
     }

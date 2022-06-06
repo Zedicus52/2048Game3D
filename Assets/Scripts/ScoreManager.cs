@@ -7,6 +7,7 @@ public class ScoreManager : MonoBehaviour
    [SerializeField] private TMP_Text _scoreText;
    [SerializeField] private TMP_Text _bestScoreText;
    [SerializeField] private TMP_Text _finishText;
+   [SerializeField] private TMP_Text _label;
    private int _score;
    private int _bestScore;
    private SaveLoadSystem _saveLoadSystem;
@@ -28,9 +29,10 @@ public class ScoreManager : MonoBehaviour
       }
    }
 
-   public void FinisGame()
+   public void FinisGame(bool isWin)
    {
       _scoreText.enabled = false;
+      _label.text = isWin ? "You win!" : "You lose!";
       _bestScoreText.text = "Best score:\n" + _bestScore;
       _finishText.text = "Score:\n" + _score;
    }

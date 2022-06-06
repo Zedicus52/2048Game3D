@@ -27,10 +27,8 @@ public class CubeMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
-
         float posX = _rb.position.x + _directionX * _speed * Time.deltaTime;
         _rb.MovePosition(new Vector3(posX, _rb.position.y, _rb.position.z));
-        
     }
 
     private void Move(float directionX)
@@ -56,8 +54,8 @@ public class CubeMovement : MonoBehaviour
         _canMove = false;
         _rb.AddForce(new Vector3(0,0,_accelerationSpeed), ForceMode.Impulse);
         yield return new WaitForSecondsRealtime(0.5f);
-        SpawnCube?.Invoke();
         _rb.freezeRotation = false;
+        SpawnCube?.Invoke();
         _directionX = 0f;
         _canMove = true;
     }

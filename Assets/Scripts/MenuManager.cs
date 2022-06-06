@@ -28,7 +28,7 @@ public class MenuManager : MonoBehaviour
         _retryBtn.onClick.RemoveListener(() => SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex)); 
     }
 
-    public void FinisGame()
+    public void FinisGame(bool win = true)
     {
         Time.timeScale = 0f;
         _finishMenu.gameObject.SetActive(true);
