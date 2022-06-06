@@ -66,6 +66,5 @@ public class CubeMovement : MonoBehaviour
     {
         _rb = rb;
         _rb.velocity = Vector3.zero;
-        _rb.freezeRotation = true;
     }
 }

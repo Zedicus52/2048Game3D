@@ -4,6 +4,7 @@ using UnityEngine;
 public class CubeDecorator : MonoBehaviour
 {
     [SerializeField] private List<CubeMaterial> _cubesMaterial;
+    
 
     public void SetCubeColor(Cube cube)
     {

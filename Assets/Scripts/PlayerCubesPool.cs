@@ -6,6 +6,8 @@ public class PlayerCubesPool : MonoBehaviour
     [SerializeField] private bool _autoExpand = true;
     [SerializeField] private int _basicCount = 20;
     [SerializeField] private Vector3 _startPos;
+    [SerializeField] private ScoreManager _scoreManager;
+    [SerializeField] private MenuManager _menuManager;
     
     private PoolBasic<Cube> _cubes;
     private CubeMovement _cubeMovement;
@@ -33,9 +35,12 @@ public class PlayerCubesPool : MonoBehaviour
     {
         var cube = _cubes.GetFreeElement();
         cube.transform.position = _startPos;
-        _cubeDecorator.SetCubeColor(cube.GetComponent<Cube>());
+        _cubeDecorator.SetCubeColor(cube);
         cube.gameObject.transform.rotation = new Quaternion(0, 0, 0, 0);
         cube.gameObject.SetActive(true);
+        cube.AddScore += _scoreManager.AddScore;
+        cube.FinishGame += _menuManager.FinisGame;
+        cube.FinishGame += _scoreManager.FinisGame;
         if(cube.gameObject.TryGetComponent(out Rigidbody rb))
             _cubeMovement.SetCubeRigidbody(rb);
     }
