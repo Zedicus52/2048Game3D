@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 515b6947cb845d64f922a5ff408203fc, type: 3}
+  m_Name: Cube Entry Store
+  m_EditorClassIdentifier: Game::Game.Settings.CubeEntryStore
+  _cubeSettings:
+  - {fileID: 11400000, guid: 1fe5aa5705b6ba840aa922d09c66bdb9, type: 2}
+  - {fileID: 11400000, guid: a6cd4d2bf4bfc234a8f4ec87d0216e56, type: 2}
+  - {fileID: 11400000, guid: b23fd6502eb107e4fab090c37d70c458, type: 2}
+  - {fileID: 11400000, guid: 3b31f9f773c066e4596dc6c04f9477f4, type: 2}
+  - {fileID: 11400000, guid: 3b1361ec86dc4a24e938a03de6bbab5d, type: 2}
+  - {fileID: 11400000, guid: 6105c5082e488bf4b9a116c54b8ccb2f, type: 2}
+  - {fileID: 11400000, guid: 9e582468dc4ba814abf75890b5c78bc5, type: 2}
+  - {fileID: 11400000, guid: 463839ecb20123e4591ebe0880535502, type: 2}
+  - {fileID: 11400000, guid: 2680a9b2ce66ef94d9e42eda1bc2459f, type: 2}
+  - {fileID: 11400000, guid: 0d3823083cb04cf44a766c6363bf30e5, type: 2}
+  _maxCubeEntry: {fileID: 11400000, guid: db9ceb136dbbcac41a46a615976a6f0c, type: 2}

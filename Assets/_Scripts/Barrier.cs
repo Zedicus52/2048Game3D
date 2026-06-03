@@ -11,7 +11,7 @@ public class Barrier : MonoBehaviour
         {
             if (cube.GetComponent<Rigidbody>().linearVelocity == Vector3.zero)
             {
-                cube.EndGame(false);
+                //cube.EndGame(false);
                 Time.timeScale = 0f;
             }
                 
