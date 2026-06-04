@@ -1,4 +1,5 @@
 using Game.Core;
+using Game.Managers;
 using Game.Settings;
 using System;
 using System.Linq;
@@ -7,20 +8,23 @@ namespace Game.Gameplay
 {
     public sealed class CubesController : IInitializable, IDisposable
     {
-        public event Action<int> CubeCollides;
-
         private readonly CubeProvider _cubesProvider;
         private readonly CubeMovement _cubeMovement;
 
         private readonly CubeEntryStore _cubeEntryStore;
         private readonly CubeSpawnPoint _cubeSpawnPoint;
+        private readonly IScoreManager _scoreManager;
+        private readonly IGameStateService _stateService;
 
-        public CubesController(CubeMovement cubeMovement, CubeProvider cubeProvider, CubeEntryStore cubeEntryStore, CubeSpawnPoint spawnPoint)
+        public CubesController(CubeMovement cubeMovement, CubeProvider cubeProvider, 
+            CubeEntryStore cubeEntryStore, CubeSpawnPoint spawnPoint, IScoreManager scoreManager, IGameStateService stateService)
         {
             _cubeSpawnPoint = spawnPoint;
             _cubeEntryStore = cubeEntryStore;
             _cubeMovement = cubeMovement;
             _cubesProvider = cubeProvider;
+            _scoreManager = scoreManager;
+            _stateService = stateService;
         }
 
         public void Initialize()
@@ -54,6 +58,10 @@ namespace Game.Gameplay
             target.AddImpulse();
 
             _cubesProvider.ReleaseCube(initiator);
+            _scoreManager.AddScore(newNumber);
+
+            if (newNumber == GameSettings.kMaxCubeValue)
+                _stateService.WinGame();
         }
 
         private CubeEntrySettings FindCubeSettings(int newNumber)

@@ -54,6 +54,9 @@ public class CubeMovement : IFixedTickable, IDisposable
 
     private void ShootCube()
     {
+        if (_canMove == false)
+            return;
+
         _canMove = false;
         _currentCube.StopMovingRoutine();
         _currentCube.LaunchCube(_settings.AccelerationSpeed);

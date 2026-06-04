@@ -87,6 +87,11 @@ public sealed class Cube : MonoBehaviour
             StopCoroutine(_impulseRoutine);
     }
 
+    public bool IsMoving()
+    {
+        return Rigidbody.linearVelocity != Vector3.zero;
+    }
+
     private IEnumerator StartImpulseRoutine(float accelerationSpeed)
     {
         _rb.freezeRotation = false;

@@ -11,8 +11,22 @@ namespace Game.Core
         public override void InstallBindings()
         {
             BindInputManager();
+            BindSaveManager();
 
+            BindBootstrapper();
+        }
+
+        private void BindBootstrapper()
+        {
             Container.BindInterfacesTo<Bootstrapper>().AsSingle();
+        }
+
+        private void BindSaveManager()
+        {
+            Container.Bind<ISaveManager>()
+               .To<PlayerPrefsSaveManager>()
+               .AsSingle()
+               .NonLazy();
         }
 
         private void BindInputManager()
