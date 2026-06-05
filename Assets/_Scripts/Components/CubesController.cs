@@ -16,6 +16,8 @@ namespace Game.Gameplay
         private readonly IScoreManager _scoreManager;
         private readonly IGameStateService _stateService;
 
+        private bool _isGameEnded;
+
         public CubesController(CubeMovement cubeMovement, CubeProvider cubeProvider, 
             CubeEntryStore cubeEntryStore, CubeSpawnPoint spawnPoint, IScoreManager scoreManager, IGameStateService stateService)
         {
@@ -30,11 +32,15 @@ namespace Game.Gameplay
         public void Initialize()
         {
             _cubeMovement.CubeMovementEnded += SpawnNewCube;
+            _stateService.GameEnded += OnGameEnded;
             SpawnNewCube();
         }
 
         private void SpawnNewCube()
         {
+            if (_isGameEnded)
+                return;
+
             var cube = _cubesProvider.GetCube();
             cube.SetPosition(_cubeSpawnPoint.SpawnPoint.position);
             var cubeSettings = _cubeEntryStore.CubeSettigs.Random();
@@ -46,7 +52,7 @@ namespace Game.Gameplay
 
         private void OnCubeCollides(Cube initiator, Cube target)
         {
-            if (initiator.CubeValue != target.CubeValue)
+            if (initiator.CubeValue != target.CubeValue || _isGameEnded)
                 return;
 
             initiator.CubesCollides -= OnCubeCollides;
@@ -79,6 +85,11 @@ namespace Game.Gameplay
             {
                 item.CubesCollides -= OnCubeCollides;
             }
+        }
+
+        private void OnGameEnded(bool isEnded)
+        {
+            _isGameEnded = true;
         }
     }
 }

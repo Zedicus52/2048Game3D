@@ -6,8 +6,8 @@ namespace Game.UI
 {
     public sealed class GameResultPresenter : IInitializable, IDisposable
     {
-        private const string kWinLable = "Win!";
-        private const string kLoseLable = "Lose!";
+        private const string kWinLable = "You win!";
+        private const string kLoseLable = "You lose!";
         private const int kStartScene = 1;
 
         private readonly GameResultView _resultView;

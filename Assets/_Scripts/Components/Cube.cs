@@ -1,6 +1,7 @@
 using Game.Settings;
 using System;
 using System.Collections;
+using TMPro;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -16,6 +17,8 @@ public sealed class Cube : MonoBehaviour
 
     public Rigidbody Rigidbody => _rb;
     public int CubeValue { get; private set; }
+
+    [SerializeField] private TMP_Text[] _cubeNumber;
 
     private MeshRenderer _meshRenderer;
     private Rigidbody _rb;
@@ -33,7 +36,7 @@ public sealed class Cube : MonoBehaviour
 
     private void Update()
     {
-        if(_transform.position.y < -50)
+        if (_transform.position.y < -50)
             _gameObject.SetActive(false);
     }
     private void OnTriggerEnter(Collider other)
@@ -41,6 +44,7 @@ public sealed class Cube : MonoBehaviour
         if (other.TryGetComponent(out Cube cube))
         {
             OnCubeCollides(this, cube);
+            OnCubeLauched();
         }
     }
 
@@ -48,6 +52,7 @@ public sealed class Cube : MonoBehaviour
     {
         CubeValue = settings.CubeValue;
         _meshRenderer.sharedMaterial = settings.CubeMaterial;
+        SetCubeValue(settings.CubeValue);
     }
 
     public void AddImpulse()
@@ -55,7 +60,7 @@ public sealed class Cube : MonoBehaviour
         float forceX = Random.Range(-kMaxImpulseForce, kMaxImpulseForce);
         float forceY = Random.Range(kMinImpulseForce, kMaxImpulseForce);
         float forceZ = Random.Range(kMinImpulseForce, kMaxImpulseForce);
-        _rb.AddForce(new Vector3(forceX,forceY,forceZ),ForceMode.Impulse);
+        _rb.AddForce(new Vector3(forceX, forceY, forceZ), ForceMode.Impulse);
     }
 
     public void ResetCube()
@@ -99,6 +104,14 @@ public sealed class Cube : MonoBehaviour
         yield return new WaitForSeconds(kPostMovementDelay);
 
         OnCubeLauched();
+    }
+
+    private void SetCubeValue(int number)
+    {
+        foreach (var item in _cubeNumber)
+        {
+            item.text = number.ToString();
+        }
     }
 
     private void OnCubeCollides(Cube current, Cube second)

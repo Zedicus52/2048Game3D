@@ -4,24 +4,33 @@ using System;
 using UnityEngine;
 using Zenject;
 
-public class CubeMovement : IFixedTickable, IDisposable
+public class CubeMovement : IFixedTickable, IDisposable, IInitializable
 {
     public event Action CubeMovementEnded;
 
     private readonly IInputManager _inputManager;
     private readonly CubeAccelerationSettings _settings;
+    private IGameStateService _gameStateService;
 
     private bool _canMove = true;
+    private bool _isGameEnded;
     private Rigidbody _rb;
     private float _directionX = 0f;
     private Cube _currentCube;
 
-    public CubeMovement(IInputManager inputManager, CubeAccelerationSettings settings)
+    public CubeMovement(IInputManager inputManager, CubeAccelerationSettings settings, IGameStateService stateService)
     {
         _settings = settings;
         _inputManager = inputManager;
+        _gameStateService = stateService;
+        _gameStateService = stateService;
+    }
+
+    public void Initialize()
+    {
         _inputManager.HorizontalInputChanged += SetCubeDirection;
         _inputManager.ShootTriggered += ShootCube;
+        _gameStateService.GameEnded += OnGameEnded;
     }
 
     public void SetCurrentCube(Cube cube)
@@ -44,17 +53,24 @@ public class CubeMovement : IFixedTickable, IDisposable
         UnsubscribeFromCubeEvents();
         _inputManager.HorizontalInputChanged -= SetCubeDirection;
         _inputManager.ShootTriggered -= ShootCube;
+        _gameStateService.GameEnded -= OnGameEnded;
+    }
+
+    private void OnGameEnded(bool isEnded)
+    {
+        _isGameEnded = true;
+        _directionX = 0;
     }
 
     private void SetCubeDirection(float directionX)
     {
-        if(_canMove) 
+        if(_canMove && _isGameEnded == false) 
             _directionX = directionX;
     }
 
     private void ShootCube()
     {
-        if (_canMove == false)
+        if (_canMove == false || _isGameEnded)
             return;
 
         _canMove = false;
