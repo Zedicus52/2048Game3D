@@ -1,0 +1,99 @@
+using Game.Managers;
+using Game.Settings;
+using System;
+using UnityEngine;
+using Zenject;
+
+public class CubeMovement : IFixedTickable, IDisposable, IInitializable
+{
+    public event Action CubeMovementEnded;
+
+    private readonly IInputManager _inputManager;
+    private readonly CubeAccelerationSettings _settings;
+    private IGameStateService _gameStateService;
+
+    private bool _canMove = true;
+    private bool _isGameEnded;
+    private Rigidbody _rb;
+    private float _directionX = 0f;
+    private Cube _currentCube;
+
+    public CubeMovement(IInputManager inputManager, CubeAccelerationSettings settings, IGameStateService stateService)
+    {
+        _settings = settings;
+        _inputManager = inputManager;
+        _gameStateService = stateService;
+        _gameStateService = stateService;
+    }
+
+    public void Initialize()
+    {
+        _inputManager.HorizontalInputChanged += SetCubeDirection;
+        _inputManager.ShootTriggered += ShootCube;
+        _gameStateService.GameEnded += OnGameEnded;
+    }
+
+    public void SetCurrentCube(Cube cube)
+    {
+        UnsubscribeFromCubeEvents();
+
+        _currentCube = cube;
+        _currentCube.CubeLauched += OnCubeLaunched;
+        _currentCube.LockCube();
+        _rb = cube.Rigidbody;
+    }
+    public void FixedTick()
+    {
+        float posX = _rb.position.x + _directionX * _settings.Speed * Time.deltaTime;
+        _rb.MovePosition(new Vector3(posX, _rb.position.y, _rb.position.z));
+    }
+
+    public void Dispose()
+    {
+        UnsubscribeFromCubeEvents();
+        _inputManager.HorizontalInputChanged -= SetCubeDirection;
+        _inputManager.ShootTriggered -= ShootCube;
+        _gameStateService.GameEnded -= OnGameEnded;
+    }
+
+    private void OnGameEnded(bool isEnded)
+    {
+        _isGameEnded = true;
+        _directionX = 0;
+    }
+
+    private void SetCubeDirection(float directionX)
+    {
+        if(_canMove && _isGameEnded == false) 
+            _directionX = directionX;
+    }
+
+    private void ShootCube()
+    {
+        if (_canMove == false || _isGameEnded)
+            return;
+
+        _canMove = false;
+        _currentCube.StopMovingRoutine();
+        _currentCube.LaunchCube(_settings.AccelerationSpeed);
+    }
+
+    private void UnsubscribeFromCubeEvents()
+    {
+        if (_currentCube == null)
+            return;
+
+        _currentCube.CubeLauched -= OnCubeLaunched;
+    }
+
+    private void OnCubeLaunched()
+    {
+        _canMove = true;
+        OnCubeMovementEnded();
+    }
+
+    private void OnCubeMovementEnded()
+    {
+        CubeMovementEnded?.Invoke();
+    }
+}
